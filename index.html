@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4457e9" />
+    <title>Calcverse — Universal Calculator Hub</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#top" aria-label="Calcverse home"><span class="brand-mark">C</span><span>calc<span>verse</span></span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#overview"><i class="fa-solid fa-house"></i> Home</a>
+          <a class="nav-link" href="#favorites"><i class="fa-solid fa-star"></i> Favorites <span class="nav-count" id="favoriteCount">0</span></a>
+          <a class="nav-link" href="#recent"><i class="fa-solid fa-clock-rotate-left"></i> Recently used</a>
+        </nav>
+        <p class="nav-heading">Explore categories</p>
+        <nav class="category-nav" id="categoryNav" aria-label="Calculator categories"></nav>
+        <div class="sidebar-footer">
+          <div class="offline-status"><span></span> Works offline</div>
+          <p>One website. Every calculation.</p>
+        </div>
+      </aside>
+
+      <main id="top">
+        <header class="topbar">
+          <button class="icon-button menu-button" id="menuButton" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+          <div class="mobile-brand"><span class="brand-mark">C</span> calc<span>verse</span></div>
+          <div class="topbar-actions">
+            <button class="icon-button" id="themeToggle" aria-label="Toggle color theme"><i class="fa-regular fa-moon"></i></button>
+          </div>
+        </header>
+
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">YOUR DAILY UTILITY DESK</p>
+            <h1>Every calculation,<br><em>beautifully simple.</em></h1>
+            <p class="hero-text">The fast, focused hub for money, health, study, engineering, and the little things in between.</p>
+            <label class="search-box" for="calculatorSearch">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="calculatorSearch" type="search" placeholder="Search a calculator..." autocomplete="off" />
+              <kbd>⌘ K</kbd>
+            </label>
+            <p class="search-hint" id="searchHint">Browse by category or search 50+ useful tools</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true">
+            <div class="orbit-dot dot-one">%</div><div class="orbit-dot dot-two">π</div><div class="orbit-dot dot-three">÷</div>
+            <div class="calculator-illustration"><div class="calc-screen">2,184.50</div><span>7</span><span>8</span><span>9</span><b>÷</b><span>4</span><span>5</span><span>6</span><b>×</b><span>1</span><span>2</span><span>3</span><b>−</b><span>0</span><span>.</span><b>＝</b><b>+</b></div>
+          </div>
+        </section>
+
+        <section class="quick-strip" aria-label="Quick stats">
+          <div><span class="quick-icon purple"><i class="fa-solid fa-bolt"></i></span><p><strong>Instant results</strong><small>As you type</small></p></div>
+          <div><span class="quick-icon orange"><i class="fa-solid fa-shield-heart"></i></span><p><strong>Private by default</strong><small>Saved only on your device</small></p></div>
+          <div><span class="quick-icon green"><i class="fa-solid fa-wifi"></i></span><p><strong>Made for anywhere</strong><small>Lightweight & responsive</small></p></div>
+        </section>
+
+        <section class="dashboard-section" id="overview">
+          <div class="section-heading"><div><p class="eyebrow">YOUR TOOLKIT</p><h2>Choose a category</h2></div></div>
+          <div class="category-overview-grid" id="overviewCategoryGrid"></div>
+        </section>
+
+        <section class="dashboard-section browse-section" id="explore">
+          <div class="section-heading"><div><p class="eyebrow">CATEGORY TOOLS</p><h2 id="activeCategoryName">AI Toolkit</h2></div><span class="result-count" id="resultCount"></span></div>
+          <div class="calculator-grid" id="calculatorGrid"></div>
+          <div class="empty-state hidden" id="emptyState"><i class="fa-solid fa-magnifying-glass"></i><h3>No calculator found</h3><p>Try another name or browse one of the categories above.</p></div>
+        </section>
+
+        <section class="recent-section hidden" id="recent">
+          <div class="section-heading"><div><p class="eyebrow">YOUR ACTIVITY</p><h2>Recently used</h2></div><button class="text-button" id="clearRecent">Clear history</button></div>
+          <div class="recent-list" id="recentList"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop hidden" id="modalBackdrop"></div>
+    <section class="calculator-modal hidden" id="calculatorModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><span class="modal-category" id="modalCategory"></span><h2 id="modalTitle">Calculator</h2></div><button class="icon-button close-button" id="modalClose" aria-label="Close calculator"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body" id="modalBody"></div>
+    </section>
+    <div class="toast hidden" id="toast"></div>
+    <script src="app.js"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');</script>
+  </body>
+</html>
